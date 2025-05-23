@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(ROOTEGPythia6 VERSION 1.0.0 LANGUAGES CXX C)
+project(ROOTEGPythia6 VERSION 6.28.0 LANGUAGES CXX C)
 
 option(ROOTEGPythia6_Pythia6_BUILTIN "Whether to build Pythia6" ON)
 
@@ -49,7 +49,7 @@ ROOT_GENERATE_DICTIONARY(TPythia6
               ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6.h
               ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6Decayer.h
               LINKDEF ${CMAKE_CURRENT_LIST_DIR}/inc/LinkDef.h
-              OPTIONS -p)
+              OPTIONS --noIncludePaths)
 
 add_library(EGPythia6 SHARED 
               TPythia6.cxx

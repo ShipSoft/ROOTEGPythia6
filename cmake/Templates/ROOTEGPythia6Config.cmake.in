@@ -1,0 +1,48 @@
+@PACKAGE_INIT@
+
+if(TARGET ROOT::EGPythia6)
+  set(ROOTEGPythia6_FOUND TRUE)
+  return()
+endif()
+
+set(ROOTEGPythia6_VERSION @PROJECT_VERSION@)
+
+find_package(ROOT 6 REQUIRED)
+
+if(NOT @ROOTEGPythia6_Pythia6_BUILTIN@)
+  find_package(Pythia6 REQUIRED)
+endif()
+
+set(ROOTEGPythia6_FOUND TRUE)
+include(${CMAKE_CURRENT_LIST_DIR}/ROOTEGPythia6Targets.cmake)
+
+if(NOT TARGET ROOT::EGPythia6)
+  set(ROOTEGPythia6_FOUND FALSE)
+  return()
+endif()
+get_filename_component(ROOTEGPythia6_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+message(STATUS "Found ROOTEGPythia6 Version: ${ROOTEGPythia6_VERSION} in \"${ROOTEGPythia6_CMAKE_DIR}\"")
+
+
+find_path(ROOTEGPythia6_LIB_DIR
+  NAMES libEGPythia6.so
+  PATHS ${ROOTEGPythia6_CMAKE_DIR}/../../
+)
+
+find_path(ROOTEGPythia6_INCLUDE_DIR
+  NAMES TPythia6.h
+  PATHS ${ROOTEGPythia6_CMAKE_DIR}/../../../include
+)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ROOTEGPythia6
+    REQUIRED_VARS 
+      ROOTEGPythia6_INCLUDE_DIR 
+      ROOTEGPythia6_LIB_DIR
+    VERSION_VAR 
+      ROOTEGPythia6_VERSION
+)
+
+message(STATUS "Found ROOTEGPythia6 Version: ${ROOTEGPythia6_VERSION} in \"${ROOTEGPythia6_CMAKE_DIR}\"")
+message(STATUS "    ROOTEGPythia6_INCLUDE_DIR: ${ROOTEGPythia6_INCLUDE_DIR}")
+message(STATUS "    ROOTEGPythia6_LIB_DIR: ${ROOTEGPythia6_LIB_DIR}")
