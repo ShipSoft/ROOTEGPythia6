@@ -49,10 +49,11 @@ add_library(EGPythia6 SHARED
 
 add_library(ROOT::EGPythia6 ALIAS EGPythia6)
 
+include_directories(${CMAKE_CURRENT_LIST_DIR}/inc)
 ROOT_GENERATE_DICTIONARY(G__EGPythia6
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TMCParticle.h
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6.h
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6Decayer.h
+              TMCParticle.h
+              TPythia6.h
+              TPythia6Decayer.h
               MODULE EGPythia6
               LINKDEF ${CMAKE_CURRENT_LIST_DIR}/inc/LinkDef.h
               OPTIONS --noIncludePaths)
