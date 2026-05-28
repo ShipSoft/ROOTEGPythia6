@@ -32,8 +32,6 @@ if(ROOTEGPythia6_Pythia6_BUILTIN)
     pythia6/tpythia6_called_from_cc.F)
 
   set_source_files_properties(pythia6/tpythia6_called_from_cc.F PROPERTIES COMPILE_FLAGS -fno-second-underscore)
-  target_compile_options(Pythia6 PRIVATE -march=native)
-
   add_library(Pythia6::Pythia6 ALIAS Pythia6)
 
   install(TARGETS Pythia6
