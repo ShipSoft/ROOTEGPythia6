@@ -42,20 +42,20 @@ else()
   find_package(Pythia6 REQUIRED)
 endif()
 
-ROOT_GENERATE_DICTIONARY(TPythia6
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TMCParticle.h
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6.h
-              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6Decayer.h
-              LINKDEF ${CMAKE_CURRENT_LIST_DIR}/inc/LinkDef.h
-              OPTIONS --noIncludePaths)
-
-add_library(EGPythia6 SHARED 
-              TPythia6.cxx
+add_library(EGPythia6 SHARED
               ${CMAKE_CURRENT_LIST_DIR}/src/TMCParticle.cxx
               ${CMAKE_CURRENT_LIST_DIR}/src/TPythia6.cxx
               ${CMAKE_CURRENT_LIST_DIR}/src/TPythia6Decayer.cxx)
 
 add_library(ROOT::EGPythia6 ALIAS EGPythia6)
+
+ROOT_GENERATE_DICTIONARY(G__EGPythia6
+              ${CMAKE_CURRENT_LIST_DIR}/inc/TMCParticle.h
+              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6.h
+              ${CMAKE_CURRENT_LIST_DIR}/inc/TPythia6Decayer.h
+              MODULE EGPythia6
+              LINKDEF ${CMAKE_CURRENT_LIST_DIR}/inc/LinkDef.h
+              OPTIONS --noIncludePaths)
 
 target_link_libraries(EGPythia6 PUBLIC ROOT::EG Pythia6::Pythia6)
 target_include_directories(EGPythia6 PUBLIC 
@@ -71,9 +71,9 @@ install(TARGETS EGPythia6
       ARCHIVE DESTINATION lib 
       PUBLIC_HEADER DESTINATION include)
 
-install(FILES 
-    ${CMAKE_CURRENT_BINARY_DIR}/libTPythia6.rootmap 
-    ${CMAKE_CURRENT_BINARY_DIR}/libTPythia6_rdict.pcm 
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/libEGPythia6.rootmap
+    ${CMAKE_CURRENT_BINARY_DIR}/libEGPythia6_rdict.pcm
   DESTINATION lib)
 
 install(EXPORT ROOTEGPythia6-targets
