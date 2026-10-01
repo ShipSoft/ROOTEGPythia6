@@ -58,7 +58,7 @@ ROOT_GENERATE_DICTIONARY(G__EGPythia6
               LINKDEF ${CMAKE_CURRENT_LIST_DIR}/inc/LinkDef.h
               OPTIONS --noIncludePaths)
 
-target_link_libraries(EGPythia6 PUBLIC ROOT::EG Pythia6::Pythia6)
+target_link_libraries(EGPythia6 PUBLIC ROOT::EG PRIVATE Pythia6::Pythia6)
 target_include_directories(EGPythia6 PUBLIC 
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/inc>
   $<INSTALL_INTERFACE:include>)

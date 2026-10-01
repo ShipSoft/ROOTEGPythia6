@@ -9,10 +9,6 @@ set(ROOTEGPythia6_VERSION @PROJECT_VERSION@)
 
 find_package(ROOT 6 REQUIRED)
 
-if(NOT @ROOTEGPythia6_Pythia6_BUILTIN@)
-  find_package(Pythia6 REQUIRED)
-endif()
-
 set(ROOTEGPythia6_FOUND TRUE)
 include(${CMAKE_CURRENT_LIST_DIR}/ROOTEGPythia6Targets.cmake)
 
