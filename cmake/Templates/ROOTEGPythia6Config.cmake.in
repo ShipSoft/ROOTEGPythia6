@@ -21,7 +21,7 @@ message(STATUS "Found ROOTEGPythia6 Version: ${ROOTEGPythia6_VERSION} in \"${ROO
 
 
 find_path(ROOTEGPythia6_LIB_DIR
-  NAMES libEGPythia6.so
+  NAMES libEGPythia6${CMAKE_SHARED_LIBRARY_SUFFIX} libEGPythia6.so
   PATHS ${ROOTEGPythia6_CMAKE_DIR}/../../
 )
 

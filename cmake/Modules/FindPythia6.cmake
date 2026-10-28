@@ -43,25 +43,30 @@ if(NOT TARGET Pythia6::Pythia6)
   EnsureVarOrEnvSet(PYTHIA6_ENV_LIB_DIR PYTHIA6_LIB_DIR)
   EnsureVarOrEnvSet(PYTHIA6_LIBRARY PYTHIA6_LIBRARY)
 
-  find_path(PYTHIA6_LIB_DIR
-  NAMES libPythia6.so
-  PATHS ${PYTHIA6} ${PYTHIA6_ENV_LIB_DIR} ${PYTHIA6_LIBRARY})
+  # find_library adds the platform's library prefix and suffix (.so, .dylib).
+  # Pythia6 is the compatibility name some packages ship; pythia6 is the
+  # library itself.
+  find_library(PYTHIA6_LIB
+    NAMES Pythia6 pythia6
+    HINTS ${PYTHIA6_LIB_DIR}
+    PATHS ${PYTHIA6} ${PYTHIA6_ENV_LIB_DIR} ${PYTHIA6_LIBRARY})
 
   include(FindPackageHandleStandardArgs)
   find_package_handle_standard_args(Pythia6
-      REQUIRED_VARS 
-        PYTHIA6_LIB_DIR
+      REQUIRED_VARS
+        PYTHIA6_LIB
   )
 
   if(NOT Pythia6_FOUND)
     return()
   endif()
 
+  get_filename_component(PYTHIA6_LIB_DIR ${PYTHIA6_LIB} DIRECTORY)
   message(STATUS "Found Pythia6:")
   message(STATUS "     PYTHIA6_LIB_DIR: ${PYTHIA6_LIB_DIR}")
 
   add_library(Pythia6::Pythia6 SHARED IMPORTED)
   set_target_properties(Pythia6::Pythia6 PROPERTIES
-      IMPORTED_LOCATION ${PYTHIA6_LIB_DIR}/libPythia6.so
+      IMPORTED_LOCATION ${PYTHIA6_LIB}
     )
 endif()
