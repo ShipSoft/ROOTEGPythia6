@@ -46,8 +46,13 @@ if(NOT TARGET Pythia6::Pythia6)
   # find_library adds the platform's library prefix and suffix (.so, .dylib).
   # Pythia6 is the compatibility name some packages ship; pythia6 is the
   # library itself.
+  # Search again when the hint changes; find_library keeps its cached result otherwise.
+  if(DEFINED _PYTHIA6_LIB_DIR_LAST AND NOT "${PYTHIA6_LIB_DIR}" STREQUAL "${_PYTHIA6_LIB_DIR_LAST}")
+    unset(PYTHIA6_LIB CACHE)
+  endif()
+  set(_PYTHIA6_LIB_DIR_LAST "${PYTHIA6_LIB_DIR}" CACHE INTERNAL "")
   find_library(PYTHIA6_LIB
-    NAMES Pythia6 pythia6
+    NAMES Pythia6 pythia6 NAMES_PER_DIR
     HINTS ${PYTHIA6_LIB_DIR}
     PATHS ${PYTHIA6} ${PYTHIA6_ENV_LIB_DIR} ${PYTHIA6_LIBRARY})
 
