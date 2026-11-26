@@ -67,7 +67,7 @@ For the details about these generators look at Pythia/Jetset manual:
 #include "TClonesArray.h"
 #include "TMCParticle.h"
 #include "TParticle.h"
-#include "snprintf.h"
+#include <cstdio>
 #include "strlcpy.h"
 
 TPythia6*  TPythia6::fgInstance = nullptr;
