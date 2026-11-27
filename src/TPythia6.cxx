@@ -459,7 +459,7 @@ void TPythia6::Initialize(const char *frame, const char *beam, const char *targe
       printf("WARNING! In TPythia6:Initialize():\n");
       printf(" specified frame=%s is neither of CMS,FIXT,USER,FOUR,FIVE,NONE,3MOM,4MOM,5MOM\n",frame);
       printf(" resetting to \"CMS\" .");
-      snprintf(cframe,4,"CMS");
+      std::snprintf(cframe,4,"CMS");
    }
 
    if ( (!strncmp(beam, "e"       ,1)) &&
@@ -481,7 +481,7 @@ void TPythia6::Initialize(const char *frame, const char *beam, const char *targe
       printf("WARNING! In TPythia6:Initialize():\n");
       printf(" specified beam=%s is unrecognized .\n",beam);
       printf(" resetting to \"p+\" .");
-      snprintf(cbeam,8,"p+");
+      std::snprintf(cbeam,8,"p+");
    }
 
    if ( (!strncmp(target, "e"       ,1)) &&
@@ -503,13 +503,13 @@ void TPythia6::Initialize(const char *frame, const char *beam, const char *targe
       printf("WARNING! In TPythia6:Initialize():\n");
       printf(" specified target=%s is unrecognized.\n",target);
       printf(" resetting to \"p+\" .");
-      snprintf(ctarget,8,"p+");
+      std::snprintf(ctarget,8,"p+");
    }
 
    Pyinit(cframe, cbeam ,ctarget, win);
 
    char atitle[64];
-   snprintf(atitle, sizeof(atitle)," %s-%s at %g GeV", cbeam, ctarget, win);
+   std::snprintf(atitle, sizeof(atitle)," %s-%s at %g GeV", cbeam, ctarget, win);
    SetTitle(atitle);
 }
 
